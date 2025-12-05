@@ -2,7 +2,9 @@
 ## SmartLibrary – Kütüphane Yönetim Sistemi
 
 Ders: Nesneye Dayalı Programlama II
+
 Hazırlayan: Beyza Çevik
+
 Öğrenci No: 20230108010
 
 Not: Proje kodları main branch üzerinde değil, master branch altında bulunmaktadır.
