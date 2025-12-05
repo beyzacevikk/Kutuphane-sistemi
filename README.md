@@ -1,137 +1,162 @@
-# SmartLibrary – Kütüphane Yönetim Sistemi
 
-**Ders:** Nesneye Dayalı Programlama II
-**Hazırlayan:** Beyza Çevik
-**Öğrenci No:** 20230108010
+## SmartLibrary – Kütüphane Yönetim Sistemi
 
+Ders: Nesneye Dayalı Programlama II
+Hazırlayan: Beyza Çevik
+Öğrenci No: 20230108010
 
-## Kodlar için main Branchten master Branche geçiniz
+Not: Proje kodları main branch üzerinde değil, master branch altında bulunmaktadır.
 
+## 1. Projenin Amacı
 
-## Projenin Genel Amacı
+SmartLibrary, Java ve SQLite kullanılarak geliştirilen temel bir kütüphane yönetim sistemidir.
+Projenin amacı; nesneye dayalı programlama prensiplerini uygulayarak kitap, öğrenci ve ödünç işlemlerinin yönetilebildiği konsol tabanlı bir sistem oluşturmaktır.
 
-SmartLibrary, Java ile geliştirilmiş, SQLite veritabanı kullanan basit bir kütüphane yönetim sistemidir.
-Projenin hedefi; nesneye dayalı programlama prensiplerini kullanarak kitap, öğrenci ve ödünç işlemlerinin yönetilebildiği, konsol tabanlı bir uygulama oluşturmaktır.
+Uygulama ile:
 
-Bu sistemde kullanıcı yeni kitaplar ve öğrenciler ekleyebilir, ekli kayıtları listeleyebilir, kitap ödünç verme ve geri alma işlemlerini gerçekleştirebilir.
+Yeni kitap ve öğrenci eklenebilir,
 
+Mevcut kayıtlar listelenebilir,
 
+Ödünç verme ve teslim alma işlemleri yapılabilir,
 
-## Kullanılan Teknolojiler
+Ödünç listesi ilişkisel olarak görüntülenebilir.
 
-* Java (Nesneye Dayalı Programlama)
-* SQLite
-* JDBC
-* PreparedStatement
-* ArrayList
-* IntelliJ IDEA
+## 2. Kullanılan Teknolojiler
 
+Java (OOP yapısıyla)
 
+SQLite
 
-## Sınıf Yapısı
+JDBC + PreparedStatement
 
-### 1. **Temel Varlık Sınıfı**
+ArrayList Koleksiyon Yapıları
 
-* **BaseEntity**
+IntelliJ IDEA
 
-  * Tüm varlıkların ortak `id` alanı burada tutulur.
+SQLite JDBC Driver
 
-### 2. **Kitap – Book**
+Harici framework kullanılmamıştır, tüm işlem JDBC üzerinden yürütülmektedir.
 
-* id
-* title
-* author
-* year
+## 3. Sınıf Yapısı
+1. BaseEntity
 
-### 3. **Öğrenci – Student**
+Tüm varlıkların ortak id alanını içeren temel sınıftır.
 
-* id
-* name
-* department
+2. Book
 
-### 4. **Ödünç İşlemi – Loan**
+id
 
-* id
-* bookId
-* studentId
-* dateBorrowed
-* dateReturned
+title
 
-### 5. **Database**
+author
 
-* SQLite bağlantısını kurar
-* Tabloları oluşturur
-* Bağlantının çalışmasını kontrol eder
+year
 
+3. Student
 
+id
 
-## Repository Yapısı
+name
 
-Her tablo için ayrı Repository sınıfları bulunmaktadır.
-Bu sınıflar, ilgili tabloda CRUD işlemlerinin yapılmasını sağlar.
+department
 
-* **BookRepository**
-* **StudentRepository**
-* **LoanRepository**
+## 4. Loan
 
-Bu sınıflarda bulunan ortak metotlar:
+id
 
-* `add()`
-* `update()`
-* `delete()`
-* `getById()`
-* `getAll()`
+bookId
 
-LoanRepository ek olarak bir kitabın ödünçte olup olmadığını kontrol eden metot içerir.
+studentId
 
+dateBorrowed
 
+dateReturned
 
-## Veri Tabanı Yapısı
+## 5. Database
 
-### books
+SQLite bağlantısını kurar
+
+Tabloları oluşturur
+
+Bağlantının doğruluğunu kontrol eder
+
+## 4. Repository Yapısı
+
+Her tablo için ayrı bir repository sınıfı bulunur:
+
+BookRepository
+
+StudentRepository
+
+LoanRepository
+
+Repository’lerde ortak CRUD metotları yer alır:
+
+add()
+
+update()
+
+delete()
+
+getById()
+
+getAll()
+
+LoanRepository, ek olarak kitapların ödünçte olup olmadığını kontrol eden ek fonksiyonlar içerir.
+
+## 5. Veritabanı Yapısı
+books
 
 | id | title | author | year |
 
-### students
+students
 
 | id | name | department |
 
-### loans
+loans
 
 | id | bookId | studentId | dateBorrowed | dateReturned |
 
-Tablolar uygulama çalışmaya başladığında otomatik olarak oluşturulur.
+Uygulama ilk kez çalıştırıldığında tablolar otomatik oluşturulur.
 
+## 6. Uygulama Menüsü
 
+Konsol menüsünde kullanıcıya şu işlemler sunulur:
 
-## Uygulama Menüsü
+Kitap ekle
 
-Konsol ekranı üzerinden kullanıcıya şu işlemler sunulur:
+Kitapları listele
 
-1. Kitap ekle
-2. Kitapları listele
-3. Öğrenci ekle
-4. Öğrencileri listele
-5. Kitap ödünç ver
-6. Ödünç kayıtlarını görüntüle
-7. Kitap geri teslim al
-8. Çıkış
+Öğrenci ekle
 
-Ödünç listeleme ekranında **kitap adı** ve **öğrenci adı** ilişkisel olarak görüntülenir.
+Öğrencileri listele
 
+Kitap ödünç ver
 
+Ödünç kayıtlarını görüntüle
 
-## Kurulum
+Kitap geri teslim al
 
-1. Projeyi bilgisayarınıza indirin.
-2. `sqlite-jdbc` sürücüsünü `lib` klasörüne ekleyin.
-3. IntelliJ IDEA → Project Structure → Dependencies kısmından JAR dosyasını projeye tanıtın.
-4. Uygulamayı `Main.java` üzerinden çalıştırın.
-5. Veritabanı dosyası (`smartlibrary.db`) otomatik olarak oluşturulur.
+Çıkış
 
+Ödünç listeleme ekranında kitap adı ve öğrenci adı ilişkisel olarak gösterilir.
 
+## 7. Kurulum Adımları
 
-## Sonuç
+Projeyi indirin veya clonelayın.
 
-SmartLibrary, ders kapsamında istenen tüm gereksinimleri karşılayan; sınıf yapıları, veritabanı bağlantısı, JDBC işlemleri ve konsol menüsüyle çalışır bir kütüphane otomasyonudur.
-Öğrenci, kitap ve ödünç süreçlerinin tamamı nesneye dayalı programlama prensiplerine uygun şekilde yapılandırılmıştır.
+sqlite-jdbc sürücüsünü lib klasörüne ekleyin.
+
+IntelliJ IDEA → Project Structure → Dependencies kısmından JAR dosyasını projeye tanıtın.
+
+Main.java dosyasını çalıştırın.
+
+Veritabanı (smartlibrary.db) otomatik oluşturulur.
+
+## 8. Sonuç
+
+SmartLibrary, Nesneye Dayalı Programlama II dersinin gereksinimlerini karşılayan tam işlevsel bir uygulamadır.
+OOP yapıları, repository katmanları, JDBC kullanımı ve veritabanı ilişkileri temiz ve anlaşılır bir şekilde uygulanmıştır.
+
+Proje; kitap, öğrenci ve ödünç yönetiminin temel prensiplerini göstermek amacıyla hazırlanmış olup geliştirilmeye müsaittir.
